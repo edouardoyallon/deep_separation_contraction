@@ -9,4 +9,4 @@ python build_figure_paper.py
 The best accuracy on CIFAR10 should be 95.4, and on CIFAR100 it should be 79.6, with n_channel equal to 512, alpha=1.0.
 
 # Acknowledgement
-Code modified by Edouard Oyallon
+Code modified by Edouard Oyallon - Team DATA ENS, 2016
