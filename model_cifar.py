@@ -1,9 +1,13 @@
-from __future__ import division
+#####
+## MODIFIED BY: Edouard Oyallon
+## Team DATA - ENS 2016
+## Can be found on: https://github.com/bgshih/tf_resnet_cifar
+#####
 
-import ipdb
+
+from __future__ import division
 import math
 import tensorflow as tf
-#from tensorflow.python import control_flow_ops
 import numpy as np
 import joblib
 

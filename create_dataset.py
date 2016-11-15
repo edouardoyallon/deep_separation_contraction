@@ -1,3 +1,10 @@
+#####
+## MODIFIED BY: Edouard Oyallon
+## Team DATA - ENS 2016
+## Can be found on: https://github.com/bgshih/tf_resnet_cifar
+#####
+
+
 from __future__ import division
 
 import sys, os, time, math
@@ -18,7 +25,6 @@ FLAGS = tf.app.flags.FLAGS
 tf.app.flags.DEFINE_string('data_dir', '', 'Example: ./data_cifar10/cifar-10-batches-py/')
 tf.app.flags.DEFINE_string('data_name', '', 'Example: cifar10')
 
-# data_root = '/users/data/oyallon/resnettf/tf_resnet_cifar/mywork/src/cifar10_data/cifar-10-batches-py/'
 def create_dataset(data_root,data_name):
     def save_to_records(save_path, images, labels):
         writer = tf.python_io.TFRecordWriter(save_path)
@@ -63,7 +69,6 @@ def create_dataset(data_root,data_name):
     if(data_name=='cifar10'):
         with open(os.path.join(data_root, 'test_batch'),"rb") as f:
             data_batch=pickle.load(f,encoding='bytes')
-        #  data_batch = joblib.load(os.path.join(data_root, 'test_batch'))
             test_images = data_batch[b'data']
             test_images = np.reshape(test_images, [10000,3,32,32])
             test_images = np.transpose(test_images, axes=[0,2,3,1])
@@ -72,7 +77,6 @@ def create_dataset(data_root,data_name):
     elif(data_name=='cifar100'):
         with open(os.path.join(data_root, 'test'), "rb") as f:
             data_batch = pickle.load(f, encoding='bytes')
-            #  data_batch = joblib.load(os.path.join(data_root, 'test_batch'))
             test_images = data_batch[b'data']
             test_images = np.reshape(test_images, [10000, 3, 32, 32])
             test_images = np.transpose(test_images, axes=[0, 2, 3, 1])
@@ -102,10 +106,6 @@ def create_trainset_with_mask(mask,wheretosave,date_root):
     for i in range(5):
         with open(os.path.join(data_root, 'data_batch_%d' % (i + 1)), "rb") as f:
             data_batch = pickle.load(f, encoding='bytes')
-
-            #    batch_file=os.path.join(data_root, 'data_batch_%d' % (i+1))
-            #    data_batch = unpickle(batch_file)#joblib.load(os.path.join(data_root, 'data_batch_%d' % (i+1)))
-
             train_images[10000 * i:10000 * (i + 1)] = data_batch[b'data']
             trian_labels[10000 * i:10000 * (i + 1)] = np.asarray(data_batch[b'labels'], dtype=np.int32)
     train_images = np.reshape(train_images, [50000, 3, 32, 32])

@@ -1,20 +1,18 @@
+#####
+## AUTHOR: Edouard Oyallon
+## Team DATA - ENS 2016
+#####
+
+
 from __future__ import division
 
-import sys
+
 import os
-import time
-import math
-import ipdb
-from datetime import datetime
-import numpy as np
 import tensorflow as tf
-#from tensorflow.python import control_flow_ops
-import joblib
+
 import numpy as np
 from matplotlib.ticker import ScalarFormatter
 import matplotlib.pyplot as plt
-import model_resnet as m
-import model_utils as mu
 
 FLAGS = tf.app.flags.FLAGS
 tf.app.flags.DEFINE_string('load_dir', '', '')
@@ -136,9 +134,6 @@ def get_acc():
   x=np.load('incorrect_renorm.npy')
 
   for p in range(12):
-    # plt.hist(x[2*p], bins, color='red',alpha=0.5, label='x',normed=1)
-    # plt.hist(x[2*p+1], bins, alpha=0.5, label='y',normed=1)
-    values, base = np.histogram(x[2 * p], bins=bins)
     values2, base2 = np.histogram(x[2 * p + 1], bins=bins)
     e = 0.7 / 12.0
     f = 0.1
@@ -146,16 +141,11 @@ def get_acc():
     plt.plot(base2[0:-1], np.cumsum(values2) / np.sum(values2), color=c)
 
   for p in range(12):
-    # plt.hist(x[2*p], bins, color='red',alpha=0.5, label='x',normed=1)
-    # plt.hist(x[2*p+1], bins, alpha=0.5, label='y',normed=1)
     values, base = np.histogram(x[2 * p], bins=bins)
-    values2, base2 = np.histogram(x[2 * p + 1], bins=bins)
     e = 0.7 / 12.0
     f = 0.1
     c = (e * p + f, e * p + f, e * p + f)
     plt.plot(base[0:-1], np.cumsum(values) / np.sum(values), '--', color=c)
-
-    # plt.xscale('log')
     plt.yscale('log')
   plt.ylabel('Cumulative distribution')
   plt.xlabel('Distance')

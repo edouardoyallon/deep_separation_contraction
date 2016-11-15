@@ -1,3 +1,10 @@
+#####
+## MODIFIED BY: Edouard Oyallon
+## Team DATA - ENS 2016
+## Can be found on: https://github.com/bgshih/tf_resnet_cifar
+#####
+
+
 import tensorflow as tf
 
 def shape_probe(tensor):
@@ -18,17 +25,11 @@ def conv_map_montage(conv_maps):
     montage: [B x H' x W']
   """
   raise NotImplementedError
-  # shape = tf.shape(conv_maps)
-  # B, H, W, C = shape[0], shape[1], shape[2], shape[3]
-  # maps = tf.transpose(conv_maps, [0,3,1,2])
-  # tf.gather(maps, )
+
 
 def activation_summary(x):
   tensor_name = x.op.name
   tf.histogram_summary('activations/' + tensor_name, x)
-  # tf.scalar_summary(tensor_name + '/max', tf.reduce_max(x))
-  # tf.scalar_summary(tensor_name + '/min', tf.reduce_min(x))
-  # tf.scalar_summary(tensor_name + '/mean', tf.reduce_mean(x))
   tf.scalar_summary(tensor_name + '/sparsity', tf.nn.zero_fraction(x))
 
 def histogram_summary_for_all_variables():
