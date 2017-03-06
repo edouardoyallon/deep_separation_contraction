@@ -1,35 +1,24 @@
+#####
+## MODIFIED BY: Edouard Oyallon
+## Team DATA - ENS 2016
+## Can be found on: https://github.com/bgshih/tf_resnet_cifar
+#####
+
+
 from __future__ import division
 
 
 import os
-import time
-import math
-import ipdb
-from datetime import datetime
-import numpy as np
 import tensorflow as tf
-#from tensorflow.python import control_flow_ops
-from sklearn.cross_validation import ShuffleSplit
 from sklearn.metrics.pairwise import pairwise_distances
-import joblib
 import numpy as np
 from sklearn import preprocessing
-from sklearn.grid_search import GridSearchCV
-#import model_resnet_notabs as m
-import model_cifar as m
-import model_utils as mu
-import create_dataset
-from imblearn.under_sampling import CondensedNearestNeighbour
 
-from sklearn.lda import LDA
-from sklearn.svm import LinearSVC
+import model_cifar as m
+
 from sklearn.svm import SVC
-from sklearn.neighbors import RadiusNeighborsClassifier
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.neighbors import NearestNeighbors
-from sklearn.manifold import TSNE
-from sklearn.manifold import Isomap
-import scipy as sp
 
 FLAGS = tf.app.flags.FLAGS
 tf.app.flags.DEFINE_string('load_dir', '', '')
@@ -50,7 +39,6 @@ tf.app.flags.DEFINE_integer('save_interval', 5000, '')
 tf.app.flags.DEFINE_integer('save_end_accuracy', 5000, '')
 tf.app.flags.DEFINE_bool('recompute', False, '')
 
-from sklearn.neighbors import RadiusNeighborsClassifier
 
 
 

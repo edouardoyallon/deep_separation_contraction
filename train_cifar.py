@@ -1,20 +1,21 @@
+#####
+## MODIFIED BY: Edouard Oyallon
+## Team DATA - ENS 2016
+## Can be found on: https://github.com/bgshih/tf_resnet_cifar
+#####
+
+
 from __future__ import division
 
-import sys
+
 import os
-import time
-import math
-import ipdb
 from datetime import datetime
-import numpy as np
 import tensorflow as tf
-import joblib
 import numpy as np
 
 
 import model_cifar_contract as m_c
 import model_cifar as m
-import model_utils as mu
 
 FLAGS = tf.app.flags.FLAGS
 tf.app.flags.DEFINE_string('load_dir', '', '')
