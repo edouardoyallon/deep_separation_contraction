@@ -130,11 +130,13 @@ def get_acc():
     axis.set_major_formatter(ScalarFormatter())
 
   plt.savefig(os.path.join(FLAGS.save_fig, 'C100_nchannel.eps'), format='eps', dpi=1000, bbox_inches='tight')
-
+  cmap=plt.get_cmap('jet')
+  line_colors = cmap(np.linspace(0,1,12))
   plt.clf()
   bins = np.linspace(0, 2., 100)
   x=np.load('incorrect_renorm.npy')
 
+  from matplotlib.lines import Line2D
   for p in range(12):
     # plt.hist(x[2*p], bins, color='red',alpha=0.5, label='x',normed=1)
     # plt.hist(x[2*p+1], bins, alpha=0.5, label='y',normed=1)
@@ -143,7 +145,7 @@ def get_acc():
     e = 0.7 / 12.0
     f = 0.1
     c = (e * p + f, e * p + f, e * p + f)
-    plt.plot(base2[0:-1], np.cumsum(values2) / np.sum(values2), color=c)
+    plt.plot(base2[0:-1], np.cumsum(values2) / np.sum(values2), color=line_colors[p])
 
   for p in range(12):
     # plt.hist(x[2*p], bins, color='red',alpha=0.5, label='x',normed=1)
@@ -153,7 +155,7 @@ def get_acc():
     e = 0.7 / 12.0
     f = 0.1
     c = (e * p + f, e * p + f, e * p + f)
-    plt.plot(base[0:-1], np.cumsum(values) / np.sum(values), '--', color=c)
+    plt.plot(base[0:-1], np.cumsum(values) / np.sum(values),':', color=line_colors[p])
 
     # plt.xscale('log')
     plt.yscale('log')
@@ -184,7 +186,7 @@ def get_acc():
   x = np.load('spec.npy')
   plt.xlabel('Principal components')
   plt.ylabel('Cumulated variance')
-
+  linestyles = ['-', '--',  ':']
   plt.xlim([1, 32])
   for i in range(12):
     a=x[i,8,:] #5avant
@@ -192,7 +194,7 @@ def get_acc():
     e=0.7/12.0
     f=0.1
     c=(e*j+f,e*j+f,e*j+f)
-    plt.plot(np.array(range(32))+1,np.cumsum(a),color=c)
+    plt.plot(np.array(range(32))+1,np.cumsum(a),color=line_colors[i])
 
   d=[]
   for i in range(12):
@@ -205,12 +207,13 @@ def get_acc():
 
   plt.xlim([2, 13])
   x=x/(5000*5000/2)
+  linestyles = ['-', '--',  ':']
   for i in range(10):
     a = x[:, i]
     e = 0.7 / 12.0
     f = 0.1
     c = (e * i + f, e * i + f, e * i+ f)
-    plt.plot(np.array(range(12)) + 2,a, color=c)
+    plt.plot(np.array(range(12)) + 2,a, color=line_colors[i])
 
   d=[]
   for i in range(10):
@@ -223,12 +226,13 @@ def get_acc():
   plt.clf()
   x = np.load('SVs.npy')
 
+  line_colors = cmap(np.linspace(0,1,12))
   for i in range(12):
     a = x[i, :]
     e = 0.7 / 12.0
     f = 0.1
     c = (e * i + f, e * i + f, e * i + f)
-    plt.plot(a, color=c)
+    plt.plot(a, color=line_colors[i])
   plt.ylabel('|$\Gamma_n^k$|')
   plt.xlabel('k')
   d=[]
