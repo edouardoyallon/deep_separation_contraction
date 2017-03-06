@@ -1,5 +1,3 @@
-# THANKS SHARING NOTHING/KEEPING IT CONFIDENTIAL
-
 # Building a Regular Classification Boundary with Deep Networks
 This is the code for the CVPR17 paper  "Building a Regular Classification Boundary with Deep Networks" by Edouard Oyallon. A large part of the code is inspired from https://github.com/bgshih/tf_resnet_cifar yet it has been modified a lot.
 
